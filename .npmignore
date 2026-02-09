@@ -2,3 +2,4 @@
 .releaserc.js
 CHANGELOG.md
 .gitignore
+.semantic-release-version
