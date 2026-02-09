@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.4...v1.2.0) (2026-02-09)
+
+
+### Features
+
+* add .semantic-release-version to .npmignore and .gitignore ([e51d2db](https://github.com/ls-ramos/testTrustedPublisher/commit/e51d2dba9c8800f84f377c7df9144d0cbc068a36))
+
 ## [1.1.4](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.3...v1.1.4) (2026-02-09)
 
 
