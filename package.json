@@ -1,0 +1,26 @@
+{
+  "name": "@lucasdssramos/test-trusted-publisher",
+  "version": "1.0.0",
+  "description": "Test package for npm trusted publishing with semantic-release",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "test": "echo 'Tests passed' && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ls-ramos/testTrustedPublisher.git"
+  },
+  "keywords": [
+    "test",
+    "trusted-publisher",
+    "semantic-release"
+  ],
+  "author": "Lucas Dos Santos Ramos",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
+  }
+}
