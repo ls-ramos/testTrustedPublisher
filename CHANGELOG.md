@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.0.0...v1.1.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* replace @semantic-release/npm with @semantic-release/exec for trusted publishing ([9a1a00b](https://github.com/ls-ramos/testTrustedPublisher/commit/9a1a00b4c2681562deea680e9f7581a4e547c84c))
+
+
+### Features
+
+* trigger first trusted publisher release ([f6e9d51](https://github.com/ls-ramos/testTrustedPublisher/commit/f6e9d51601514df0b9914a9e70ef617a0872ee04))
+
 # 1.0.0 (2026-02-09)
 
 
