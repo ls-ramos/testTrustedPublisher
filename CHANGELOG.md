@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.2...v1.1.3) (2026-02-09)
+
+
+### Bug Fixes
+
+* add debug dry-run test for OIDC trusted publishing ([05a24a5](https://github.com/ls-ramos/testTrustedPublisher/commit/05a24a5346d486e06b9c34a6f097eb918859671d))
+
 ## [1.1.2](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.1...v1.1.2) (2026-02-09)
 
 
