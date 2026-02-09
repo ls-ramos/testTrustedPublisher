@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.0...v1.1.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* unset NODE_AUTH_TOKEN to enable OIDC auth for npm publish ([93e51d4](https://github.com/ls-ramos/testTrustedPublisher/commit/93e51d44bc979402ca1b064fb7fa93288522bdce))
+
 # [1.1.0](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.0.0...v1.1.0) (2026-02-09)
 
 
