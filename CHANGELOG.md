@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.0...v1.1.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to allow OIDC auth flow ([354f016](https://github.com/ls-ramos/testTrustedPublisher/commit/354f0164e420bef5a3cdfec2be5222925d4322a1))
+
 # [1.1.0](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.0.0...v1.1.0) (2026-02-09)
 
 
