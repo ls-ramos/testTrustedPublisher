@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.3...v1.1.4) (2026-02-09)
+
+
+### Bug Fixes
+
+* run npm publish as direct workflow step for OIDC compatibility ([2c5ff60](https://github.com/ls-ramos/testTrustedPublisher/commit/2c5ff60ca549f2fa35f230d1485294d6a705d022))
+
 ## [1.1.3](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.2...v1.1.3) (2026-02-09)
 
 

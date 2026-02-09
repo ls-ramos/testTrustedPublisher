@@ -1,6 +1,6 @@
 {
   "name": "@lucasdssramos/test-trusted-publisher",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Test package for npm trusted publishing with semantic-release",
   "main": "src/index.js",
   "scripts": {
