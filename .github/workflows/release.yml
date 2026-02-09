@@ -30,10 +30,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           # Node.js 24 ships with npm 11.5.1+ which is REQUIRED for trusted publishing.
-          # npm 11.5.1+ automatically detects OIDC environments and uses them
-          # for authentication before falling back to traditional tokens.
           node-version: 24.x
-          registry-url: 'https://registry.npmjs.org'
+          # NOTE: Do NOT set registry-url here!
+          # setup-node with registry-url creates a temp .npmrc with
+          # _authToken=${NODE_AUTH_TOKEN} which prevents npm from
+          # falling through to OIDC trusted publishing.
+          # The registry is configured in the project's .npmrc instead.
 
       - name: Install dependencies
         run: npm ci
@@ -44,13 +46,21 @@ jobs:
       - name: Install semantic-release extra plugins
         run: npm install --save-dev @semantic-release/changelog @semantic-release/git @semantic-release/exec
 
+      - name: Debug - verify OIDC and npm config
+        run: |
+          echo "Node version: $(node -v)"
+          echo "npm version: $(npm -v)"
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL is set: $([[ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]] && echo 'yes' || echo 'no')"
+          echo "npm config list:"
+          npm config list
+          echo "---"
+          echo ".npmrc contents:"
+          cat .npmrc
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Unset NODE_AUTH_TOKEN so npm doesn't use the GitHub token for registry auth.
-          # setup-node with registry-url sets NODE_AUTH_TOKEN to GITHUB_TOKEN by default,
-          # which prevents npm from falling through to OIDC trusted publishing.
-          # With NODE_AUTH_TOKEN empty, npm 11.5.1+ will automatically detect the OIDC
-          # environment and use it for authentication + provenance.
-          NODE_AUTH_TOKEN: ''
+          # No NPM_TOKEN needed! Trusted publishing uses OIDC.
+          # npm 11.5.1+ automatically detects the OIDC environment in GitHub Actions
+          # and obtains a short-lived token for publishing.
         run: npx semantic-release@24
