@@ -30,7 +30,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          registry-url: 'https://registry.npmjs.org'
+          # NOTE: Do NOT set registry-url here!
+          # setup-node with registry-url creates an .npmrc with
+          # //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}
+          # which overrides the OIDC auth flow used by trusted publishing.
+          # The registry is already configured in the project's .npmrc and publishConfig.
 
       - name: Install dependencies
         run: npm ci
