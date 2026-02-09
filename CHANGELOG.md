@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.1...v1.1.2) (2026-02-09)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node with Node.js 24 for OIDC ([138db78](https://github.com/ls-ramos/testTrustedPublisher/commit/138db78fa810d651af233bb232dfd409b074f4ee))
+
 ## [1.1.1](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.0...v1.1.1) (2026-02-09)
 
 
