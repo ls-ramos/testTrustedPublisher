@@ -30,6 +30,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.x
+          # Do NOT set registry-url: it creates a temp .npmrc with
+          # _authToken=${NODE_AUTH_TOKEN} that blocks OIDC trusted publishing.
+          # The registry is configured in the project's .npmrc.
 
       - name: Install dependencies
         run: npm ci
@@ -37,23 +40,22 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Debug - verify environment
-        run: |
-          echo "Node version: $(node -v)"
-          echo "npm version: $(npm -v)"
-          echo "ACTIONS_ID_TOKEN_REQUEST_URL set: $([[ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]] && echo 'yes' || echo 'no')"
-          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN set: $([[ -n "$ACTIONS_ID_TOKEN_REQUEST_TOKEN" ]] && echo 'yes' || echo 'no')"
-          echo "--- npm config ---"
-          npm config list
-          echo "--- .npmrc ---"
-          cat .npmrc
-          echo "--- Test npm publish dry-run ---"
-          npm publish --dry-run --access public 2>&1 || true
-
       - name: Install semantic-release extra plugins
         run: npm install --save-dev @semantic-release/changelog @semantic-release/git @semantic-release/exec
 
-      - name: Release
+      - name: Semantic Release
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release@24
+
+      # npm publish must run as a direct workflow step (not through semantic-release's
+      # exec plugin) because npm's OIDC trusted publishing requires environment
+      # variables (ACTIONS_ID_TOKEN_REQUEST_URL/TOKEN) that are not available
+      # inside semantic-release's child processes.
+      - name: Publish to npm (trusted publishing)
+        if: ${{ hashFiles('.semantic-release-version') != '' }}
+        run: |
+          NEW_VERSION=$(cat .semantic-release-version)
+          echo "Publishing version $NEW_VERSION to npm via trusted publishing (OIDC)"
+          npm publish --access public
