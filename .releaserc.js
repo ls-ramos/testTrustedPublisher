@@ -7,9 +7,10 @@ module.exports = {
     },
   ],
   // Explicitly configure verifyConditions to skip npm verification.
-  // npm OIDC/trusted publishing doesn't support 'npm whoami' verification
-  // because there is no traditional npm token — the OIDC token is obtained
-  // at publish time by the npm CLI itself.
+  // Per npm docs: "npm whoami will not reflect OIDC authentication status since
+  // the authentication occurs only during the publish operation."
+  // @semantic-release/npm runs 'npm whoami' in both verifyConditions and prepare,
+  // so we replace it entirely with @semantic-release/exec.
   verifyConditions: [
     '@semantic-release/changelog',
     '@semantic-release/github',
@@ -34,16 +35,17 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
-    // Use @semantic-release/exec instead of @semantic-release/npm
-    // because the npm plugin runs 'npm whoami' during prepare/publish
-    // which fails with trusted publishing (no NPM_TOKEN available).
-    // The npm CLI handles OIDC token exchange automatically during 'npm publish --provenance'.
+    // Use @semantic-release/exec instead of @semantic-release/npm because:
+    // 1. @semantic-release/npm runs 'npm whoami' during prepare/publish which fails
+    //    with trusted publishing (OIDC auth only works during 'npm publish').
+    // 2. npm 11.5.1+ automatically handles OIDC auth and provenance when running
+    //    'npm publish' — no --provenance flag needed.
     [
       '@semantic-release/exec',
       {
         prepareCmd:
           'npm version ${nextRelease.version} --no-git-tag-version --allow-same-version',
-        publishCmd: 'npm publish --provenance --access public',
+        publishCmd: 'npm publish --access public',
       },
     ],
     '@semantic-release/github',
