@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.0.0...v1.1.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* remove registry-url from setup-node to allow OIDC auth flow ([354f016](https://github.com/ls-ramos/testTrustedPublisher/commit/354f0164e420bef5a3cdfec2be5222925d4322a1))
+* replace @semantic-release/npm with @semantic-release/exec for trusted publishing ([9a1a00b](https://github.com/ls-ramos/testTrustedPublisher/commit/9a1a00b4c2681562deea680e9f7581a4e547c84c))
+* use Node.js 24 (npm 11.5.1+) required for trusted publishing ([5574fee](https://github.com/ls-ramos/testTrustedPublisher/commit/5574fee3620e849d4598011140f8e944291932c3))
+
+
+### Features
+
+* trigger first trusted publisher release ([f6e9d51](https://github.com/ls-ramos/testTrustedPublisher/commit/f6e9d51601514df0b9914a9e70ef617a0872ee04))
+
 ## [1.1.1](https://github.com/ls-ramos/testTrustedPublisher/compare/v1.1.0...v1.1.1) (2026-02-09)
 
 
