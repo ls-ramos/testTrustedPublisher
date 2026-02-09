@@ -47,8 +47,10 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # No NPM_TOKEN needed! Trusted publishing uses OIDC.
-          # npm 11.5.1+ automatically detects the OIDC environment in GitHub Actions
-          # and obtains a short-lived token for publishing.
-          # Provenance attestations are generated automatically — no --provenance flag needed.
+          # Unset NODE_AUTH_TOKEN so npm doesn't use the GitHub token for registry auth.
+          # setup-node with registry-url sets NODE_AUTH_TOKEN to GITHUB_TOKEN by default,
+          # which prevents npm from falling through to OIDC trusted publishing.
+          # With NODE_AUTH_TOKEN empty, npm 11.5.1+ will automatically detect the OIDC
+          # environment and use it for authentication + provenance.
+          NODE_AUTH_TOKEN: ''
         run: npx semantic-release@24
