@@ -34,10 +34,16 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
+    // Use @semantic-release/exec instead of @semantic-release/npm
+    // because the npm plugin runs 'npm whoami' during prepare/publish
+    // which fails with trusted publishing (no NPM_TOKEN available).
+    // The npm CLI handles OIDC token exchange automatically during 'npm publish --provenance'.
     [
-      '@semantic-release/npm',
+      '@semantic-release/exec',
       {
-        npmPublish: true,
+        prepareCmd:
+          'npm version ${nextRelease.version} --no-git-tag-version --allow-same-version',
+        publishCmd: 'npm publish --provenance --access public',
       },
     ],
     '@semantic-release/github',
